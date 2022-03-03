@@ -156,7 +156,7 @@ if(isset($_POST['cancelEditButton'])) {
                       
 
                       <form method="post">
-                          <input class="add-button" type="submit" name="addButton" value="Add">
+                          <input class="btn btn-primary" type="submit" name="addButton" value="Add">
                       </form>
                     </div>
                   </div>
@@ -184,11 +184,11 @@ if(isset($_POST['cancelEditButton'])) {
                       </div>
                       
                       <input type="hidden" name="id" value="<?php echo $res['id'];?>">
-                      <input type="submit" name="update" value="Save">
+                      <input class="btn btn-primary mb-2" type="submit" name="update" value="Save">
                     </form>
 
-                    <form method="post">
-                      <input type="submit" name="cancelEditButton" value="Cancel">
+                    <form method="post" action="index.php">
+                      <input class="btn btn-danger" type="submit" name="cancelEditButton" value="Cancel">
                     </form>
                         
                     <?php } else { ?>
@@ -210,12 +210,12 @@ if(isset($_POST['cancelEditButton'])) {
                                 <div>
                                     <form method="post">
                                         <input type="hidden" name="id" value="<?php echo $res['id'];?>">
-                                        <input type="submit" name="editButton" value="Edit">
+                                        <input class="btn btn-warning mb-2" type="submit" name="editButton" value="Edit">
                                     </form>
 
                                     <form action="pdoService.php" method="post">
                                       <input type="hidden" name="id" value="<?php echo $res['id'];?>">
-                                      <input type="submit" name="delete" value="Delete">
+                                      <input class="btn btn-danger" type="submit" name="delete" value="Delete">
                                     </form>
                                 </div>
                             </div>
@@ -241,11 +241,11 @@ if(isset($_POST['cancelEditButton'])) {
                             </div>
                         </div>
 
-                        <input type="submit" name="addNewItemButton" value="Add">
+                        <input class="btn btn-primary mb-2" type="submit" name="addNewItemButton" value="Save">
                     </form>
 
-                    <form method="post">
-                      <input type="submit" name="cancelAddButton" value="Cancel">
+                    <form method="post" action="index.php" class="inline-block">
+                      <input class="btn btn-danger" type="submit" name="cancelAddButton" value="Cancel">
                     </form>
                     <?php } ?>
                 </div>
