@@ -1,5 +1,4 @@
 <?php
-
 $host = "ec2-44-194-67-28.compute-1.amazonaws.com";
 $user = "uynayhduoxnokb";
 $password = "bd6991e567142e0b4d46cadefb8d3f10c14247ee32769d5e6df6052bf77329f5";
@@ -8,7 +7,7 @@ $port = "5432";
 
 try{
   //Set DSN data source name
-    $dsn = "pgsql:host=" . $host . ";port=" . $port .";dbname=" . $dbname . ";user=" . $user . ";password=" . $password . ";";
+  $dsn = "pgsql:host=" . $host . ";port=" . $port .";dbname=" . $dbname . ";user=" . $user . ";password=" . $password . ";";
 
 
   //create a pdo instance
@@ -18,8 +17,6 @@ try{
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 catch (PDOException $e) {
-echo 'Connection failed: ' . $e->getMessage();
+  echo 'Connection failed: ' . $e->getMessage();
 }
-
-echo "Connect success!"
 ?>

@@ -1,7 +1,14 @@
 <?php
-include_once("config.php");
+// include_once("config.php");
 
-$result = mysqli_query($connect, "SELECT * FROM education ORDER BY id ASC"); // using mysqli_query instead
+// $result = mysqli_query($connect, "SELECT * FROM education ORDER BY id ASC"); // using mysqli_query instead
+include_once("pdoConfig.php");
+
+$sql = 'SELECT * FROM education';
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+// $rowCount = $stmt->rowCount();
+// $details = $stmt->fetch();
 
 $isEdit = false;
 $isAdd = false;
@@ -150,39 +157,39 @@ if(isset($_POST['cancelEditButton'])) {
 
                       <form method="post">
                           <input class="add-button" type="submit" name="addButton" value="Add">
-                          <!-- <i class="fa fa-plus"></i> -->
                       </form>
                     </div>
                   </div>
 
-                    <?php while($res = mysqli_fetch_array($result)) {
-                            if($id == $res['id'] && $isEdit == true) {
-                    ?>
-                      <form action="service.php" method="post">
-                        <div class="right-block-subitem">
-                          <div class="right-block-item-subtitle">
-                            <input class="right-block-item-subtitle-input" type="text" name="name" value="<?php echo $res['name'];?>"></input>
-                          </div>
-                          
-
-                          <div class="right-block-subitem-content">
-                            <div class="right-block-subitem-content-content">
-                              <input class="right-block-item-content-input" type="text" name="content" value="<?php echo $res['content'];?>"></input>
-                            </div>
-
-                            <div class="right-block-subitem-content-time">
-                              <input class="right-block-item-content-input" type="text" name="time" value="<?php echo $res['time'];?>"></input>
-                            </div>
-                          </div>
+                  <?php
+                    while($res = json_decode(json_encode($stmt->fetch()), true)) {
+                      if($id == $res['id'] && $isEdit == true) {
+                  ?>
+                    <form action="pdoService.php" method="post">
+                      <div class="right-block-subitem">
+                        <div class="right-block-item-subtitle">
+                          <input class="right-block-item-subtitle-input" type="text" name="name" value="<?php echo $res['name'];?>"></input>
                         </div>
                         
-                        <input type="hidden" name="id" value="<?php echo $res['id'];?>">
-                        <input type="submit" name="update" value="Save">
-                      </form>
 
-                      <form method="post">
-                        <input type="submit" name="cancelEditButton" value="Cancel">
-                      </form>
+                        <div class="right-block-subitem-content">
+                          <div class="right-block-subitem-content-content">
+                            <input class="right-block-item-content-input" type="text" name="content" value="<?php echo $res['content'];?>"></input>
+                          </div>
+
+                          <div class="right-block-subitem-content-time">
+                            <input class="right-block-item-content-input" type="text" name="time" value="<?php echo $res['time'];?>"></input>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <input type="hidden" name="id" value="<?php echo $res['id'];?>">
+                      <input type="submit" name="update" value="Save">
+                    </form>
+
+                    <form method="post">
+                      <input type="submit" name="cancelEditButton" value="Cancel">
+                    </form>
                         
                     <?php } else { ?>
                         <div class="right-block-subitem">
@@ -206,19 +213,17 @@ if(isset($_POST['cancelEditButton'])) {
                                         <input type="submit" name="editButton" value="Edit">
                                     </form>
 
-                                    <form action="service.php" method="post">
+                                    <form action="pdoService.php" method="post">
                                       <input type="hidden" name="id" value="<?php echo $res['id'];?>">
                                       <input type="submit" name="delete" value="Delete">
                                     </form>
-                                    <!-- <i class="fa fa-edit"></i>
-                                    <i class="fa fa-archive"></i> -->
                                 </div>
                             </div>
                         </div>
                     <?php }} ?>
 
                     <?php if($isAdd == true){ ?>
-                    <form action="service.php" method="post">
+                    <form action="pdoService.php" method="post">
                         <div class="right-block-subitem">
                             <div class="right-block-item-subtitle">
                                 <input class="right-block-item-subtitle-input" type="text" name="name"></input>
